@@ -1,120 +1,116 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+import { useState, useEffect, useRef } from 'react'
+import axios from 'axios'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [question, setQuestion] = useState('')
+  const [answer, setAnswer] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const [placeholderIndex, setPlaceholderIndex] = useState(0)
+  
+  const placeholders = [
+    'Ask anything...',
+    'What is Bitcoin?',
+    'Explain Java OOP',
+    'How to learn coding?',
+    'Tell me about AI'
+  ]
+
+  const inputRef = useRef(null)
+  const answerRef = useRef(null)
+
+  // Rotating placeholder effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPlaceholderIndex((prev) => (prev + 1) % placeholders.length)
+    }, 2500)
+    return () => clearInterval(interval)
+  }, [])
+
+  // Typewriter effect for answer
+  useEffect(() => {
+    if (answer && answerRef.current) {
+      answerRef.current.innerText = ''
+      let index = 0
+      const timer = setInterval(() => {
+        if (index < answer.length) {
+          answerRef.current.innerText += answer[index]
+          index++
+        } else {
+          clearInterval(timer)
+        }
+      }, 30)
+      return () => clearInterval(timer)
+    }
+  }, [answer])
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    if (!question.trim()) {
+      setError('Please enter a question')
+      return
+    }
+
+    setLoading(true)
+    setError('')
+    setAnswer('')
+
+    try {
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+      const response = await axios.post(`${API_URL}/api/ask`, {
+        question: question.trim()
+      })
+      setAnswer(response.data.answer)
+    } catch (err) {
+      setError(err.response?.data?.error || 'Failed to get response. Please try again.')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="app">
+      <div className="background"></div>
+      
+      <div className="container">
+        <div className="glass-panel">
+          <div className="header">
+            <h1 className="title">Cognitia AI</h1>
+            <p className="subtitle">Ask the AI Anything</p>
+          </div>
 
-      <div className="ticks"></div>
+          <form className="input-section" onSubmit={handleSubmit}>
+            <div className="input-wrapper">
+              <input
+                ref={inputRef}
+                type="text"
+                className="input"
+                placeholder={placeholders[placeholderIndex]}
+                value={question}
+                onChange={(e) => setQuestion(e.target.value)}
+                disabled={loading}
+              />
+            </div>
+            <button type="submit" className="ask-btn" disabled={loading}>
+              {loading ? 'Thinking...' : 'Ask'}
+            </button>
+          </form>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+          {error && <p className="error">{error}</p>}
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+          {answer && (
+            <div className="response-card">
+              <p ref={answerRef} className="answer-text"></p>
+            </div>
+          )}
+
+          <footer className="footer">
+            <span>Powered by Groq + MongoDB</span>
+          </footer>
+        </div>
+      </div>
+    </div>
   )
 }
 
