@@ -72,16 +72,18 @@ body {
 .main-input {
   flex: 1;
   height: 100%;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.1);
   border: none;
   outline: none;
   font-size: 20px;
-  color: transparent;
-  caret-color: transparent;
+  color: #333;
+  caret-color: #333;
+  border-radius: 4px;
+  padding: 0 8px;
 }
 
 .main-input::placeholder {
-  color: transparent;
+  color: #666;
 }
 
 .ask-btn {
@@ -132,7 +134,7 @@ body {
 .answer-text {
   font-size: 18px;
   line-height: 1.6;
-  color: transparent;
+  color: #e8dcc6;
   white-space: pre-wrap;
 }
 
