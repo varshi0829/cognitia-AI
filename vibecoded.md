@@ -1,62 +1,35 @@
-# Vibecoded - AI Tools Used
+# Vibe Coded Tools Used
 
-This project was built using AI-assisted development tools.
+This project was built with the help of AI-assisted development tools.
 
-## AI Tools Used
+---
 
-### Claude Code (Anthropic)
-- **Purpose:** Primary development assistant throughout the project
-- **Role:** Full-stack architecture, code generation, debugging, deployment configuration, UI design, git workflow
+## Tools Used
 
-### Supporting Configuration
-- Model: claude-sonnet-4-6 (Claude Code CLI)
-- Stack chosen: Node.js + Express backend, React + Vite frontend
-- Pattern: MVC architecture for backend, component-based for frontend
+### Blackbox AI
+- Primary coding assistant used throughout the project
+- Helped with backend architecture, Express routing, MongoDB integration, and debugging
+- Used for Vercel deployment configuration and fixing runtime errors
 
-## What AI Helped With
+### ChatGPT
+- Debugging support and deployment guidance
+- Architecture decisions and tech stack recommendations
+- Helped troubleshoot CORS, environment variables, and Vercel setup
 
-1. **Project Setup**
-   - Initialized Vite + React frontend structure
-   - Set up Express.js backend with MVC folder layout
+### Figma AI
+- UI inspiration and interface prototyping
+- Helped shape the visual design and layout before implementation
 
-2. **Backend Development**
-   - MongoDB Atlas connection via Mongoose
-   - Groq API integration (llama-3.1-8b-instant model)
-   - Chat schema design (question + answer storage)
-   - Express routes, controllers, CORS security
+---
 
-3. **Frontend Development**
-   - React UI with glassmorphism design
-   - Typewriter animation for AI responses
-   - Rotating placeholder effect on input
-   - Pixel art background integration
+## Configurations
 
-4. **Deployment**
-   - `vercel.json` configuration for backend serverless deployment
-   - `vercel.json` for frontend SPA routing on Vercel
-   - CORS restricted to FRONTEND_URL environment variable
-   - `module.exports = app` for Vercel Node.js runtime compatibility
+- **MongoDB Atlas** — free tier cluster, stores user questions and AI answers
+- **Groq API** — `llama-3.1-8b-instant` model for fast AI responses
+- **Vercel** — frontend and backend deployed as separate projects from one repo
 
-5. **Git Workflow**
-   - Incremental commits per feature phase
-   - Descriptive commit messages
-
-## Build Commands
-
-### Frontend
-```bash
-cd frontend
-npm run dev    # Development server
-npm run build  # Production build
-```
-
-### Backend
-```bash
-cd backend
-npm run dev    # Development server
-npm start      # Production server
-```
+---
 
 ## Notes
 
-All features are fully functional with no placeholder implementations. Security practices applied: CORS origin restriction, input validation, environment variables for secrets.
+All features are fully functional with no placeholder implementations. Security practices applied — API keys stored in environment variables, CORS restricted to the deployed frontend URL, and input validated on the backend.
