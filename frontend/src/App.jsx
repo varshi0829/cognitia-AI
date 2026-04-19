@@ -20,7 +20,6 @@ function App() {
   const inputRef = useRef(null)
   const answerRef = useRef(null)
 
-  // Rotating placeholder effect
   useEffect(() => {
     const interval = setInterval(() => {
       setPlaceholderIndex((prev) => (prev + 1) % placeholders.length)
@@ -28,7 +27,6 @@ function App() {
     return () => clearInterval(interval)
   }, [])
 
-  // Typewriter effect for answer
   useEffect(() => {
     if (answer && answerRef.current) {
       answerRef.current.innerText = ''
@@ -61,9 +59,10 @@ function App() {
       const response = await axios.post(`${API_URL}/api/ask`, {
         question: question.trim()
       })
+      
       setAnswer(response.data.answer)
     } catch (err) {
-      setError(err.response?.data?.error || 'Failed to get response. Please try again.')
+      setError(err.response?.data?.error || err.message || 'Failed to get response')
     } finally {
       setLoading(false)
     }
@@ -72,43 +71,47 @@ function App() {
   return (
     <div className="app">
       <div className="background"></div>
-      
-      <div className="container">
-        <div className="glass-panel">
-          <div className="header">
-            <h1 className="title">Cognitia AI</h1>
-            <p className="subtitle">Ask the AI Anything</p>
-          </div>
+      <div className="main-wrapper">
+        <div className="title-section">
+          <h1 className="title">Cognitia AI</h1>
+          <p className="subtitle">Ask the AI Anything</p>
+        </div>
 
-          <form className="input-section" onSubmit={handleSubmit}>
-            <div className="input-wrapper">
-              <input
-                ref={inputRef}
-                type="text"
-                className="input"
-                placeholder={placeholders[placeholderIndex]}
-                value={question}
-                onChange={(e) => setQuestion(e.target.value)}
-                disabled={loading}
-              />
-            </div>
-            <button type="submit" className="ask-btn" disabled={loading}>
+        <form className="input-section" onSubmit={handleSubmit}>
+          <div className="input-bar">
+            <input
+              ref={inputRef}
+              type="text"
+              className="main-input"
+              placeholder={placeholders[placeholderIndex]}
+              value={question}
+              onChange={(e) => setQuestion(e.target.value)}
+              disabled={loading}
+            />
+            <button type="submit" className="ask-btn" disabled={loading || !question.trim()}>
               {loading ? 'Thinking...' : 'Ask'}
             </button>
-          </form>
+          </div>
+        </form>
 
-          {error && <p className="error">{error}</p>}
+        {error && <div className="error">{error}</div>}
 
-          {answer && (
-            <div className="response-card">
-              <p ref={answerRef} className="answer-text"></p>
+        {answer && (
+          <div className="response-card">
+            <div className="card-header">
+              <span className="model-label">groq</span>
             </div>
-          )}
-
-          <footer className="footer">
-            <span>Powered by Groq + MongoDB</span>
-          </footer>
-        </div>
+            <div className="response-content">
+              <p className="answer-text" ref={answerRef}></p>
+            </div>
+            <div className="card-footer">
+              <div className="divider"></div>
+              <p className="storage-text">
+                Stored securely in <span className="mongo-accent">MongoDB Atlas</span>
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
