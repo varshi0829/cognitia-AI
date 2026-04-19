@@ -161,8 +161,8 @@ Update `FRONTEND_URL` in the backend Vercel project to your frontend URL, then r
 
 | | URL |
 |---|---|
-| Frontend | YOUR_FRONTEND_URL |
-| Backend | YOUR_BACKEND_URL |
+| Frontend | https://cognitia-ai-sx15.vercel.app |
+| Backend | https://cognitia-ai.vercel.app |
 | GitHub | https://github.com/varshi0829/cognitia-AI |
 
 ---
