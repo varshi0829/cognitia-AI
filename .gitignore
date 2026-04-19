@@ -4,3 +4,5 @@ ui.jpg
 package-lock.json
 .pids/
 logs/
+videos/
+.blackbox/
