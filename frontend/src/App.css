@@ -1,5 +1,5 @@
 /* ============================================
-   EXACT ui_build.png AS BACKGROUND
+   SIMPLE CHATBOT - Clean Design
    ============================================ */
 
 * {
@@ -8,157 +8,108 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
+  background: #0a0a0f;
 }
 
 /* ============================================
-   APP - Full Screen with EXACT Image
+   APP
    ============================================ */
 .app {
   min-height: 100vh;
   width: 100%;
-  position: relative;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10vh;
+  background: linear-gradient(180deg, #0f0f14 0%, #0a0a0f 100%);
 }
 
-/* ============================================
-   BACKGROUND - EXACT ui_build.png
-   ============================================ */
-.background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-image: url('/ui_build.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-/* ============================================
-   Main wrapper
-   ============================================ */
 .main-wrapper {
-  position: relative;
   width: 100%;
-  min-height: 100vh;
+  max-width: 600px;
+  padding: 0 20px;
   z-index: 10;
 }
 
 /* ============================================
-   INPUT SECTION - positioned over image
+   INPUT SECTION
    ============================================ */
 .input-section {
-  position: absolute;
-  top: 52%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 55%;
-  z-index: 20;
+  width: 100%;
 }
 
 .input-bar {
   width: 100%;
-  height: 60px;
+  height: 56px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 12px;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 0 16px;
 }
 
 .main-input {
   flex: 1;
-  height: 100%;
   background: transparent;
   border: none;
   outline: none;
-  font-size: 20px;
-  color: transparent;
-  caret-color: transparent;
+  font-size: 16px;
+  color: #f0f0f0;
 }
 
 .main-input::placeholder {
-  color: transparent;
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .ask-btn {
-  width: 90px;
-  height: 44px;
-  background: transparent;
+  padding: 10px 20px;
+  background: #d8a93c;
   border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #0a0a0f;
   cursor: pointer;
+}
+
+.ask-btn:hover:not(:disabled) {
+  background: #e5b850;
+}
+
+.ask-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* ============================================
    ERROR
    ============================================ */
 .error {
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translateX(-50%);
   color: #ff6b6b;
+  margin-top: 12px;
   font-size: 14px;
-  z-index: 20;
 }
 
 /* ============================================
-   RESPONSE CARD - over image card
+   RESPONSE CARD
    ============================================ */
 .response-card {
-  position: absolute;
-  top: 66%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 55%;
-  min-height: 200px;
-  background: transparent;
-  border: none;
-  padding: 16px;
-  z-index: 20;
-}
-
-.card-header {
-  display: none;
-}
-
-.response-content {
-  /* transparent - image has card */
+  width: 100%;
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 20px;
 }
 
 .answer-text {
-  font-size: 18px;
+  font-size: 15px;
   line-height: 1.6;
-  color: transparent;
+  color: rgba(255, 255, 255, 0.8);
   white-space: pre-wrap;
-}
-
-.card-footer {
-  display: none;
-}
-
-/* ============================================
-   RESPONSIVE
-   ============================================ */
-@media (max-width: 768px) {
-  .input-section {
-    width: 80%;
-    top: 50%;
-  }
-  
-  .response-card {
-    width: 80%;
-    top: 62%;
-  }
-  
-  .main-input {
-    font-size: 16px;
-  }
-  
-  .answer-text {
-    font-size: 14px;
-  }
 }
