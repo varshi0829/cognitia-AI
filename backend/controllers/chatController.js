@@ -1,4 +1,4 @@
-const Groq = require('groq');
+const Groq = require('groq-sdk');
 const Chat = require('../models/Chat');
 
 const groq = new Groq({
