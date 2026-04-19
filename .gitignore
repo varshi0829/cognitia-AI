@@ -2,3 +2,5 @@ node_modules/
 .env
 ui.jpg
 package-lock.json
+.pids/
+logs/
