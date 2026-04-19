@@ -16,7 +16,7 @@ html {
 
 body {
   font-family: 'Cormorant Garamond', Georgia, serif;
-  background: #0a0a0f;
+  background: transparent;
   color: #ffffff;
   line-height: 1.6;
   min-height: 100vh;
