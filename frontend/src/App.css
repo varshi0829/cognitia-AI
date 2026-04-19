@@ -1,5 +1,5 @@
 /* ============================================
-   EXACT ui_build.png AS BACKGROUND
+   CINEMATIC AI CHATBOT - Premium Design
    ============================================ */
 
 * {
@@ -8,13 +8,14 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+html, body {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* ============================================
-   APP - Full Screen with EXACT Image
+   APP - Full Screen
    ============================================ */
 .app {
   min-height: 100vh;
@@ -24,7 +25,7 @@ body {
 }
 
 /* ============================================
-   BACKGROUND - EXACT ui_build.png
+   BACKGROUND - Full Cover Image
    ============================================ */
 .background {
   position: fixed;
@@ -36,16 +37,21 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  z-index: 0;
 }
 
 /* ============================================
-   Main wrapper
+   MAIN WRAPPER
    ============================================ */
 .main-wrapper {
   position: relative;
   width: 100%;
   min-height: 100vh;
   z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 8vh;
 }
 
 /* ============================================
@@ -62,36 +68,66 @@ body {
 
 .input-bar {
   width: 100%;
-  height: 60px;
+  height: 58px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 12px;
+  gap: 8px;
 }
 
 .main-input {
   flex: 1;
   height: 100%;
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
   outline: none;
-  font-size: 20px;
-  color: #333;
-  caret-color: #333;
-  border-radius: 4px;
-  padding: 0 8px;
+  font-size: 18px;
+  color: #222;
+  caret-color: #d8a93c;
+  padding: 0 14px;
+  transition: all 0.2s ease;
 }
 
 .main-input::placeholder {
-  color: #666;
+  color: rgba(100, 100, 100, 0.8);
 }
 
+.main-input:focus {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* ============================================
+   ASK BUTTON - Orange/Gold
+   ============================================ */
 .ask-btn {
   width: 90px;
-  height: 44px;
-  background: transparent;
+  height: 46px;
+  background: linear-gradient(135deg, #e5b850 0%, #d8a93c 100%);
   border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
   cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(216, 169, 60, 0.3);
+}
+
+.ask-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #f0c760 0%, #e5b850 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(216, 169, 60, 0.4);
+}
+
+.ask-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.ask-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /* ============================================
@@ -99,32 +135,48 @@ body {
    ============================================ */
 .error {
   position: absolute;
-  top: 60%;
+  top: 59%;
   left: 50%;
   transform: translateX(-50%);
-  color: #ff6b6b;
-  font-size: 14px;
+  color: #e74c3c;
+  font-size: 13px;
   z-index: 20;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 6px 12px;
+  border-radius: 4px;
 }
 
 /* ============================================
-   RESPONSE CARD - over image card
+   RESPONSE CARD
    ============================================ */
 .response-card {
   position: absolute;
-  top: 66%;
+  top: 64%;
   left: 50%;
   transform: translateX(-50%);
   width: 55%;
-  min-height: 200px;
-  background: transparent;
-  border: none;
-  padding: 16px;
+  min-height: 180px;
+  background: rgba(20, 20, 25, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 18px;
   z-index: 20;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .card-header {
-  display: none;
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.model-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #d8a93c;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .response-content {
@@ -132,14 +184,33 @@ body {
 }
 
 .answer-text {
-  font-size: 18px;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.65;
   color: #e8dcc6;
   white-space: pre-wrap;
 }
 
+/* Card Footer */
 .card-footer {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.divider {
   display: none;
+}
+
+.storage-text {
+  text-align: center;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.5px;
+}
+
+.mongo-accent {
+  color: #4DB33D;
+  font-weight: 500;
 }
 
 /* ============================================
@@ -151,13 +222,24 @@ body {
     top: 50%;
   }
   
-  .response-card {
-    width: 80%;
-    top: 62%;
+  .input-bar {
+    height: 52px;
   }
   
   .main-input {
-    font-size: 16px;
+    font-size: 15px;
+  }
+  
+  .ask-btn {
+    width: 80px;
+    height: 40px;
+    font-size: 14px;
+  }
+  
+  .response-card {
+    width: 80%;
+    top: 60%;
+    padding: 14px;
   }
   
   .answer-text {
