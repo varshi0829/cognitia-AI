@@ -4,44 +4,42 @@ This project was built using AI-assisted development tools.
 
 ## AI Tools Used
 
-### Blackbox CLI
-- **Purpose:** Primary development assistant
-- **Role:** Full-stack development, code generation, debugging, git workflow management
+### Claude Code (Anthropic)
+- **Purpose:** Primary development assistant throughout the project
+- **Role:** Full-stack architecture, code generation, debugging, deployment configuration, UI design, git workflow
 
-### Configuration
-- Default AI model used for code generation tasks
-- Project structure following standard MVC pattern
-- React + Express.js technology stack
+### Supporting Configuration
+- Model: claude-sonnet-4-6 (Claude Code CLI)
+- Stack chosen: Node.js + Express backend, React + Vite frontend
+- Pattern: MVC architecture for backend, component-based for frontend
 
 ## What AI Helped With
 
 1. **Project Setup**
-   - Initialized Vite + React frontend
-   - Set up Express.js backend with proper folder structure
+   - Initialized Vite + React frontend structure
+   - Set up Express.js backend with MVC folder layout
 
 2. **Backend Development**
-   - Created MongoDB connection configuration
-   - Implemented Mongoose schema for Chat model
-   - Built Groq API integration controller
-   - Set up Express routes and middleware
+   - MongoDB Atlas connection via Mongoose
+   - Groq API integration (llama-3.1-8b-instant model)
+   - Chat schema design (question + answer storage)
+   - Express routes, controllers, CORS security
 
 3. **Frontend Development**
-   - Designed glassmorphism UI matching reference image
-   - Implemented typewriter animations
-   - Added rotating placeholder effect
-   - Created responsive design
+   - React UI with glassmorphism design
+   - Typewriter animation for AI responses
+   - Rotating placeholder effect on input
+   - Pixel art background integration
 
-4. **Git Workflow**
-   - Managed incremental commits
-   - Tracked all changes phase by phase
+4. **Deployment**
+   - `vercel.json` configuration for backend serverless deployment
+   - `vercel.json` for frontend SPA routing on Vercel
+   - CORS restricted to FRONTEND_URL environment variable
+   - `module.exports = app` for Vercel Node.js runtime compatibility
 
-## Code Quality
-
-- Clean, readable code with meaningful naming
-- Proper error handling implemented
-- Input validation on backend
-- Environment variables for secrets
-- CORS configuration for security
+5. **Git Workflow**
+   - Incremental commits per feature phase
+   - Descriptive commit messages
 
 ## Build Commands
 
@@ -49,16 +47,16 @@ This project was built using AI-assisted development tools.
 ```bash
 cd frontend
 npm run dev    # Development server
-npm run build # Production build
+npm run build  # Production build
 ```
 
 ### Backend
 ```bash
 cd backend
-npm run dev   # Development server
-npm start     # Production server
+npm run dev    # Development server
+npm start      # Production server
 ```
 
 ## Notes
 
-All implementation files are committed to the repository. No placeholder implementations - all features are functional.
+All features are fully functional with no placeholder implementations. Security practices applied: CORS origin restriction, input validation, environment variables for secrets.

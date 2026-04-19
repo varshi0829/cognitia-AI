@@ -104,12 +104,6 @@ function App() {
             <div className="response-content">
               <p className="answer-text" ref={answerRef}></p>
             </div>
-            <div className="card-footer">
-              <div className="divider"></div>
-              <p className="storage-text">
-                Stored securely in <span className="mongo-accent">MongoDB Atlas</span>
-              </p>
-            </div>
           </div>
         )}
       </div>
